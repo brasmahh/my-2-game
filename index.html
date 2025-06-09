@@ -5,14 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>لعبة أبطال التنمية المستدامة</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     html, body {
       margin: 0; padding: 0;
       height: 100%;
       width: 100%;
       background-color: #000;
       color: #fff;
-      font-family: 'Arial', sans-serif;
-      font-size: 16px; /* حجم افتراضي */
+      font-family: Arial, sans-serif;
+      font-size: 16px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
@@ -20,14 +23,12 @@
       justify-content: center;
       text-align: center;
     }
-
     h1 {
-      font-size: 1.6rem;
       margin: 10px 0 15px;
       color: #FFD700;
       text-shadow: 0 0 6px #FFD700;
+      font-size: 1.6rem;
     }
-
     .game-container {
       background: #111;
       border: 3px solid #FFD700;
@@ -35,19 +36,17 @@
       padding: 12px;
       width: 90vw;
       height: 75vh;
-      box-sizing: border-box;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       box-shadow: 0 0 12px #FFD700;
+      overflow: hidden;
     }
-
     #goal {
       font-size: 1.3rem;
       margin-bottom: 12px;
       min-height: 50px;
     }
-
     .btn {
       background-color: #FFD700;
       color: black;
@@ -62,12 +61,14 @@
       justify-content: center;
       transition: background-color 0.3s ease;
       outline-offset: 3px;
+      user-select: none;
+      width: 100%;
+      box-shadow: 0 0 3px #333 inset;
     }
     .btn:hover, .btn:focus {
       background-color: #FFA500;
       outline: 3px solid #000;
     }
-
     .choice-img {
       width: 40px;
       height: 40px;
@@ -76,7 +77,6 @@
       border-radius: 6px;
       flex-shrink: 0;
     }
-
     #result {
       margin-top: 12px;
       min-height: 45px;
@@ -84,13 +84,12 @@
       font-size: 1.3rem;
       color: #4CAF50;
       text-shadow: 0 0 5px #4CAF50;
+      user-select: none;
     }
-
     #result.wrong {
       color: #f44336;
       text-shadow: 0 0 5px #f44336;
     }
-
     .accessibility-buttons {
       margin-bottom: 10px;
       display: flex;
@@ -106,6 +105,7 @@
       color: #fff;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      user-select: none;
     }
     .accessibility-buttons button:hover, .accessibility-buttons button:focus {
       background-color: #666;
@@ -209,6 +209,7 @@
 
   let current = 0;
   let currentFontSize = 16;
+  let timer = null;
 
   function loadGoal() {
     const goal = document.getElementById("goal");
@@ -223,19 +224,25 @@
       img.src = goals[current].images[i];
       img.alt = "صورة توضيحية للخيار " + (i+1);
       document.querySelectorAll(".btn")[i].disabled = false;
+      document.querySelectorAll(".btn")[i].style.display = 'flex';
     }
   }
 
   function checkAnswer(selected) {
+    if(timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
     const result = document.getElementById("result");
+
     if(selected === goals[current].correct){
       result.classList.remove('wrong');
       result.innerText = goals[current].explanation;
 
-      // تعطيل الأزرار لمنع الاختيارات أثناء الانتظار
+      // تعطيل الأزرار
       document.querySelectorAll(".btn").forEach(btn => btn.disabled = true);
 
-      setTimeout(() => {
+      timer = setTimeout(() => {
         current++;
         if(current < goals.length){
           loadGoal();
@@ -246,7 +253,6 @@
           result.innerText = "👏 إنت بطل التنمية المستدامة!";
         }
       }, 2500);
-
     } else {
       result.classList.add('wrong');
       result.innerText = "❌ حاول تاني، إنت تقدر!";
@@ -260,19 +266,4 @@
     document.documentElement.style.fontSize = currentFontSize + "px";
   }
 
-  function restartGame() {
-    current = 0;
-    document.querySelectorAll(".btn").forEach(btn => {
-      btn.style.display = "flex";
-      btn.disabled = false;
-    });
-    changeFontSize(0); // تأكد من تعيين الحجم الحالي
-    loadGoal();
-    document.getElementById("result").innerText = "";
-  }
-
-  // بدء اللعبة
-  loadGoal();
-</script>
-</body>
-</html>
+  function restart
