@@ -3,56 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لعبة أبطال التنمية المستدامة</title>
+  <title>أبطال التنمية المستدامة - نسخة داعمة لذوي الهمم</title>
   <style>
     body {
-      font-family: 'Tahoma', sans-serif;
-      background-color: #eefdf2;
-      color: #333;
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      color: #fff;
       padding: 20px;
       text-align: center;
-      font-size: 22px;
+      font-size: 24px;
+      transition: background-color 0.5s, color 0.5s;
     }
     .goal-box {
-      background: #ffffff;
-      border: 2px solid #009688;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 600px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: #111;
+      border: 4px solid #FFD700;
+      border-radius: 20px;
+      padding: 30px;
+      margin: 30px auto;
+      max-width: 800px;
+      box-shadow: 0 0 15px #FFD700;
     }
     .btn {
       display: block;
-      background-color: #009688;
-      color: white;
-      padding: 10px;
-      margin: 10px auto;
-      width: 80%;
+      background-color: #FFD700;
+      color: black;
+      padding: 20px;
+      margin: 15px auto;
+      width: 90%;
       border: none;
-      border-radius: 8px;
+      border-radius: 14px;
       cursor: pointer;
-      font-size: 20px;
+      font-size: 24px;
+      transition: background-color 0.3s ease;
     }
-    .btn:hover {
-      background-color: #00796B;
+    .btn:hover, .btn:focus {
+      background-color: #FFA500;
+      outline: 2px solid #fff;
     }
     .result {
       font-weight: bold;
-      color: #00695C;
-      margin-top: 15px;
+      color: #4CAF50;
+      margin-top: 20px;
     }
     .accessibility-buttons button {
-      padding: 10px 20px;
-      margin: 5px;
-      font-size: 18px;
+      padding: 15px 25px;
+      margin: 8px;
+      font-size: 20px;
       border: none;
-      border-radius: 6px;
+      border-radius: 10px;
       cursor: pointer;
-    }
-    .contrast {
-      background-color: #000;
+      background-color: #444;
       color: #fff;
+    }
+    img.choice-img {
+      width: 100px;
+      height: auto;
+      border: 2px solid #FFD700;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -62,14 +69,24 @@
   <div class="accessibility-buttons">
     <button onclick="changeFontSize(2)">🔍 تكبير</button>
     <button onclick="changeFontSize(-2)">🔎 تصغير</button>
-    <button onclick="toggleContrast()">🌓 تغيير التباين</button>
+    <button onclick="toggleSpeech()">🔊 قراءة صوتية</button>
+    <button onclick="toggleContrast()">🌓 تباين عالي</button>
   </div>
 
-  <div class="goal-box">
+  <div class="goal-box" tabindex="0">
     <h2 id="goal">الهدف الأول: القضاء على الفقر</h2>
-    <button class="btn" onclick="checkAnswer(0)">توفير فرص عمل ومساعدة المحتاجين</button>
-    <button class="btn" onclick="checkAnswer(1)">ترك الناس بدون دعم</button>
-    <button class="btn" onclick="checkAnswer(2)">منع المساعدات</button>
+    <button class="btn" onclick="checkAnswer(0)" tabindex="1">
+      <span id="opt0">توفير فرص عمل ومساعدة المحتاجين</span><br>
+      <img src="https://cdn-icons-png.flaticon.com/512/2331/2331934.png" alt="عمل" class="choice-img">
+    </button>
+    <button class="btn" onclick="checkAnswer(1)" tabindex="2">
+      <span id="opt1">ترك الناس بدون دعم</span><br>
+      <img src="https://cdn-icons-png.flaticon.com/512/753/753345.png" alt="رفض" class="choice-img">
+    </button>
+    <button class="btn" onclick="checkAnswer(2)" tabindex="3">
+      <span id="opt2">منع المساعدات</span><br>
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png" alt="حظر" class="choice-img">
+    </button>
     <div id="result" class="result"></div>
   </div>
 
@@ -78,58 +95,70 @@
       {
         title: "الهدف الأول: القضاء على الفقر",
         options: ["توفير فرص عمل ومساعدة المحتاجين", "ترك الناس بدون دعم", "منع المساعدات"],
+        images: [
+          "https://cdn-icons-png.flaticon.com/512/2331/2331934.png",
+          "https://cdn-icons-png.flaticon.com/512/753/753345.png",
+          "https://cdn-icons-png.flaticon.com/512/1828/1828843.png"
+        ],
         correct: 0,
-        explanation: "توفير فرص العمل والدعم المالي يساعد في القضاء على الفقر."
+        explanation: "✔️ أحسنت! توفير فرص العمل والدعم يساعد في القضاء على الفقر."
       },
       {
         title: "الهدف الرابع: التعليم الجيد",
-        options: ["بناء مدارس جديدة وتعليم الجميع", "منع الأطفال من التعليم", "التعليم للأغنياء فقط"],
+        options: ["بناء مدارس وتعليم الجميع", "منع الأطفال من التعليم", "التعليم للأغنياء فقط"],
+        images: [
+          "https://cdn-icons-png.flaticon.com/512/2922/2922079.png",
+          "https://cdn-icons-png.flaticon.com/512/753/753345.png",
+          "https://cdn-icons-png.flaticon.com/512/1828/1828843.png"
+        ],
         correct: 0,
-        explanation: "التعليم الجيد أساس لتطور المجتمع."
-      },
-      {
-        title: "الهدف السابع: طاقة نظيفة وبأسعار معقولة",
-        options: ["استخدام الشمس والرياح", "زيادة تلوث الهواء", "عدم استخدام الطاقة"],
-        correct: 0,
-        explanation: "الطاقة النظيفة مهمة لصحة الإنسان والبيئة."
-      },
-      {
-        title: "الهدف العاشر: الحد من أوجه عدم المساواة",
-        options: ["دعم ذوي الهمم والمساواة", "تمييز بين الناس", "تجاهل الفئات الضعيفة"],
-        correct: 0,
-        explanation: "المساواة تمنح الجميع فرصة للحياة الكريمة."
+        explanation: "✔️ التعليم الجيد أساس لمستقبل مشرق."
       }
     ];
 
     let current = 0;
-    let currentFontSize = 22;
-    let contrastMode = false;
+    let currentFontSize = 24;
+    let speechEnabled = false;
+    const synth = window.speechSynthesis;
+
+    function speak(text) {
+      if (speechEnabled) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = "ar-SA";
+        synth.cancel();
+        synth.speak(utterance);
+      }
+    }
 
     function checkAnswer(index) {
       const result = document.getElementById("result");
       if (index === goals[current].correct) {
-        result.innerHTML = "✔️ أحسنت! " + goals[current].explanation;
-        setTimeout(() => nextGoal(), 2500);
+        result.innerText = goals[current].explanation;
+        speak(goals[current].explanation);
+        setTimeout(() => nextGoal(), 3000);
       } else {
-        result.innerHTML = "❌ حاول مرة أخرى";
+        result.innerText = "❌ حاول مرة أخرى";
+        speak("❌ حاول مرة أخرى");
       }
     }
 
     function nextGoal() {
       current++;
-      const goal = document.getElementById("goal");
-      const btns = document.querySelectorAll(".btn");
-      const result = document.getElementById("result");
       if (current < goals.length) {
+        const goal = document.getElementById("goal");
+        const result = document.getElementById("result");
         goal.innerText = goals[current].title;
-        btns.forEach((btn, i) => {
-          btn.innerText = goals[current].options[i];
-        });
+        speak(goals[current].title);
+        for (let i = 0; i < 3; i++) {
+          document.getElementById("opt" + i).innerText = goals[current].options[i];
+          document.querySelectorAll(".choice-img")[i].src = goals[current].images[i];
+        }
         result.innerText = "";
       } else {
-        goal.innerText = "🎉 لقد أنهيت أهداف التنمية المستدامة بنجاح!";
-        btns.forEach(btn => btn.style.display = 'none');
-        result.innerText = "👏 أنت بطل التنمية المستدامة!";
+        document.getElementById("goal").innerText = "🎉 لقد أنهيت اللعبة بنجاح!";
+        speak("🎉 لقد أنهيت اللعبة بنجاح!");
+        document.querySelectorAll(".btn").forEach(btn => btn.style.display = 'none');
+        document.getElementById("result").innerText = "👏 أنت بطل التنمية المستدامة!";
       }
     }
 
@@ -138,9 +167,24 @@
       document.body.style.fontSize = currentFontSize + "px";
     }
 
+    function toggleSpeech() {
+      speechEnabled = !speechEnabled;
+      alert(speechEnabled ? "تم تفعيل القراءة الصوتية" : "تم إيقاف القراءة الصوتية");
+    }
+
     function toggleContrast() {
-      contrastMode = !contrastMode;
-      document.body.classList.toggle("contrast", contrastMode);
+      const body = document.body;
+      if (body.style.backgroundColor === 'white') {
+        body.style.backgroundColor = 'black';
+        body.style.color = 'white';
+      } else {
+        body.style.backgroundColor = 'white';
+        body.style.color = 'black';
+      }
+    }
+
+    window.onload = function() {
+      speak(goals[0].title);
     }
   </script>
 </body>
