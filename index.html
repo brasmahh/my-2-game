@@ -3,56 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>لعبة أبطال التنمية المستدامة</title>
+  <title>أبطال التنمية المستدامة - نسخة داعمة لذوي الهمم</title>
   <style>
     body {
-      font-family: 'Tahoma', sans-serif;
-      background-color: #eefdf2;
-      color: #333;
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      color: #fff;
       padding: 20px;
       text-align: center;
-      font-size: 22px;
+      font-size: 24px;
     }
     .goal-box {
-      background: #ffffff;
-      border: 2px solid #009688;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 600px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: #111;
+      border: 4px solid #FFD700;
+      border-radius: 20px;
+      padding: 30px;
+      margin: 30px auto;
+      max-width: 800px;
+      box-shadow: 0 0 15px #FFD700;
     }
     .btn {
       display: block;
-      background-color: #009688;
-      color: white;
-      padding: 10px;
-      margin: 10px auto;
-      width: 80%;
+      background-color: #FFD700;
+      color: black;
+      padding: 20px;
+      margin: 15px auto;
+      width: 90%;
       border: none;
-      border-radius: 8px;
+      border-radius: 14px;
       cursor: pointer;
-      font-size: 20px;
+      font-size: 24px;
+      transition: background-color 0.3s ease;
     }
-    .btn:hover {
-      background-color: #00796B;
+    .btn:hover, .btn:focus {
+      background-color: #FFA500;
+      outline: none;
     }
     .result {
       font-weight: bold;
-      color: #00695C;
-      margin-top: 15px;
+      color: #4CAF50;
+      margin-top: 20px;
     }
     .accessibility-buttons button {
-      padding: 10px 20px;
-      margin: 5px;
-      font-size: 18px;
+      padding: 15px 25px;
+      margin: 8px;
+      font-size: 20px;
       border: none;
-      border-radius: 6px;
+      border-radius: 10px;
       cursor: pointer;
-    }
-    .contrast {
-      background-color: #000;
+      background-color: #444;
       color: #fff;
+    }
+    img.choice-img {
+      width: 100px;
+      height: auto;
+      border: 2px solid #FFD700;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -62,14 +68,23 @@
   <div class="accessibility-buttons">
     <button onclick="changeFontSize(2)">🔍 تكبير</button>
     <button onclick="changeFontSize(-2)">🔎 تصغير</button>
-    <button onclick="toggleContrast()">🌓 تغيير التباين</button>
+    <button onclick="restartGame()">🔁 إعادة اللعب</button>
   </div>
 
-  <div class="goal-box">
-    <h2 id="goal">الهدف الأول: القضاء على الفقر</h2>
-    <button class="btn" onclick="checkAnswer(0)">توفير فرص عمل ومساعدة المحتاجين</button>
-    <button class="btn" onclick="checkAnswer(1)">ترك الناس بدون دعم</button>
-    <button class="btn" onclick="checkAnswer(2)">منع المساعدات</button>
+  <div class="goal-box" tabindex="0">
+    <h2 id="goal"></h2>
+    <button class="btn" onclick="checkAnswer(0)" tabindex="1">
+      <span id="opt0"></span><br>
+      <img src="" alt="اختيار 1" class="choice-img">
+    </button>
+    <button class="btn" onclick="checkAnswer(1)" tabindex="2">
+      <span id="opt1"></span><br>
+      <img src="" alt="اختيار 2" class="choice-img">
+    </button>
+    <button class="btn" onclick="checkAnswer(2)" tabindex="3">
+      <span id="opt2"></span><br>
+      <img src="" alt="اختيار 3" class="choice-img">
+    </button>
     <div id="result" class="result"></div>
   </div>
 
@@ -78,59 +93,100 @@
       {
         title: "الهدف الأول: القضاء على الفقر",
         options: ["توفير فرص عمل ومساعدة المحتاجين", "ترك الناس بدون دعم", "منع المساعدات"],
+        images: ["https://cdn-icons-png.flaticon.com/512/2331/2331934.png", "https://cdn-icons-png.flaticon.com/512/753/753345.png", "https://cdn-icons-png.flaticon.com/512/1828/1828843.png"],
         correct: 0,
-        explanation: "توفير فرص العمل والدعم المالي يساعد في القضاء على الفقر."
+        explanation: "✔️ برافو! كده إحنا بنساعد الناس ونقضي على الفقر."
       },
       {
         title: "الهدف الرابع: التعليم الجيد",
-        options: ["بناء مدارس جديدة وتعليم الجميع", "منع الأطفال من التعليم", "التعليم للأغنياء فقط"],
+        options: ["بناء مدارس وتعليم الجميع", "منع الأطفال من التعليم", "التعليم للأغنياء فقط"],
+        images: ["https://cdn-icons-png.flaticon.com/512/2922/2922079.png", "https://cdn-icons-png.flaticon.com/512/753/753345.png", "https://cdn-icons-png.flaticon.com/512/1828/1828843.png"],
         correct: 0,
-        explanation: "التعليم الجيد أساس لتطور المجتمع."
+        explanation: "✔️ التعليم الجيد بيفتح أبواب لمستقبل أفضل."
+      },
+      {
+        title: "الهدف السادس: المياه النظيفة والصرف الصحي",
+        options: ["توفير مياه نظيفة للجميع", "استخدام مياه ملوثة", "عدم صيانة شبكات المياه"],
+        images: ["https://cdn-icons-png.flaticon.com/512/728/728093.png", "https://cdn-icons-png.flaticon.com/512/753/753345.png", "https://cdn-icons-png.flaticon.com/512/1828/1828843.png"],
+        correct: 0,
+        explanation: "✔️ المياه النظيفة بتساعدنا نعيش بصحة."
       },
       {
         title: "الهدف السابع: طاقة نظيفة وبأسعار معقولة",
-        options: ["استخدام الشمس والرياح", "زيادة تلوث الهواء", "عدم استخدام الطاقة"],
+        options: ["استخدام الطاقة الشمسية والرياح", "استخدام الفحم فقط", "عدم ترشيد الكهرباء"],
+        images: ["https://cdn-icons-png.flaticon.com/512/1046/1046857.png", "https://cdn-icons-png.flaticon.com/512/2620/2620993.png", "https://cdn-icons-png.flaticon.com/512/753/753345.png"],
         correct: 0,
-        explanation: "الطاقة النظيفة مهمة لصحة الإنسان والبيئة."
+        explanation: "✔️ طاقة نظيفة معناها حياة أفضل للجميع."
       },
       {
-        title: "الهدف العاشر: الحد من أوجه عدم المساواة",
-        options: ["دعم ذوي الهمم والمساواة", "تمييز بين الناس", "تجاهل الفئات الضعيفة"],
+        title: "الهدف التاسع: الصناعة والابتكار",
+        options: ["تشجيع المصانع النظيفة والاختراعات", "استخدام أدوات قديمة فقط", "إيقاف التطور الصناعي"],
+        images: ["https://cdn-icons-png.flaticon.com/512/2892/2892137.png", "https://cdn-icons-png.flaticon.com/512/753/753345.png", "https://cdn-icons-png.flaticon.com/512/1828/1828843.png"],
         correct: 0,
-        explanation: "المساواة تمنح الجميع فرصة للحياة الكريمة."
+        explanation: "✔️ الابتكار بيساعدنا نعيش أحسن ونشتغل أكتر."
+      },
+      {
+        title: "الهدف العاشر: الحد من عدم المساواة",
+        options: ["مساعدة الجميع بدون تمييز", "تمييز الناس حسب اللون", "تفضيل الأغنياء فقط"],
+        images: ["https://cdn-icons-png.flaticon.com/512/1077/1077012.png", "https://cdn-icons-png.flaticon.com/512/753/753345.png", "https://cdn-icons-png.flaticon.com/512/1828/1828843.png"],
+        correct: 0,
+        explanation: "✔️ العدالة بتخلي الكل يعيش في أمان وفرص متساوية."
+      },
+      {
+        title: "الهدف الثاني عشر: الاستهلاك والإنتاج المسؤول",
+        options: ["توفير المنتجات وتدوير النفايات", "رمي الأكل الزائد", "هدر الموارد"],
+        images: ["https://cdn-icons-png.flaticon.com/512/1388/1388409.png", "https://cdn-icons-png.flaticon.com/512/753/753345.png", "https://cdn-icons-png.flaticon.com/512/1828/1828843.png"],
+        correct: 0,
+        explanation: "✔️ نستهلك بعقل ونحافظ على مواردنا."
+      },
+      {
+        title: "الهدف الثالث عشر: العمل المناخي",
+        options: ["حماية البيئة وتقليل التلوث", "زيادة المصانع الملوثة", "قطع الأشجار"],
+        images: ["https://cdn-icons-png.flaticon.com/512/1006/1006512.png", "https://cdn-icons-png.flaticon.com/512/1475/1475673.png", "https://cdn-icons-png.flaticon.com/512/447/447031.png"],
+        correct: 0,
+        explanation: "✔️ العمل المناخي بيحمي كوكبنا من التغيرات الخطيرة."
       }
     ];
 
     let current = 0;
-    let currentFontSize = 22;
-    let contrastMode = false;
+    let currentFontSize = 24;
 
     function checkAnswer(index) {
       const result = document.getElementById("result");
       if (index === goals[current].correct) {
-        result.innerHTML = "✔️ أحسنت! " + goals[current].explanation;
-        setTimeout(() => nextGoal(), 2500);
+        result.innerText = goals[current].explanation;
+        setTimeout(() => nextGoal(), 3000);
       } else {
-        result.innerHTML = "❌ حاول مرة أخرى";
+        result.innerText = "❌ حاول تاني، إنت تقدر!";
       }
     }
 
     function nextGoal() {
       current++;
-      const goal = document.getElementById("goal");
-      const btns = document.querySelectorAll(".btn");
-      const result = document.getElementById("result");
       if (current < goals.length) {
-        goal.innerText = goals[current].title;
-        btns.forEach((btn, i) => {
-          btn.innerText = goals[current].options[i];
-        });
-        result.innerText = "";
+        updateUI();
       } else {
-        goal.innerText = "🎉 لقد أنهيت أهداف التنمية المستدامة بنجاح!";
-        btns.forEach(btn => btn.style.display = 'none');
-        result.innerText = "👏 أنت بطل التنمية المستدامة!";
+        document.getElementById("goal").innerText = "🎉 خلصت اللعبة بنجاح!";
+        document.querySelectorAll(".btn").forEach(btn => btn.style.display = 'none');
+        document.getElementById("result").innerText = "👏 إنت بطل التنمية المستدامة!";
       }
+    }
+
+    function restartGame() {
+      current = 0;
+      document.querySelectorAll(".btn").forEach(btn => btn.style.display = 'block');
+      document.getElementById("result").innerText = "";
+      updateUI();
+    }
+
+    function updateUI() {
+      const goal = document.getElementById("goal");
+      goal.innerText = goals[current].title;
+      for (let i = 0; i < 3; i++) {
+        document.getElementById("opt" + i).innerText = goals[current].options[i];
+        document.querySelectorAll(".choice-img")[i].src = goals[current].images[i];
+      }
+      document.getElementById("result").innerText = "";
     }
 
     function changeFontSize(change) {
@@ -138,10 +194,8 @@
       document.body.style.fontSize = currentFontSize + "px";
     }
 
-    function toggleContrast() {
-      contrastMode = !contrastMode;
-      document.body.classList.toggle("contrast", contrastMode);
-    }
+    // بدء اللعبة تلقائياً
+    updateUI();
   </script>
 </body>
 </html>
