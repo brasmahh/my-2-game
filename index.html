@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>لعبة أبطال التنمية المستدامة - جوال</title>
+  <title>لعبة أبطال التنمية المستدامة</title>
   <style>
-    /* قاعدة الجسم */
     html, body {
       margin: 0; padding: 0;
       height: 100%;
@@ -13,40 +12,39 @@
       background-color: #000;
       color: #fff;
       font-family: 'Arial', sans-serif;
-      font-size: 22px;
-      overflow: hidden; /* منع التمرير */
+      font-size: 16px; /* حجم افتراضي */
+      overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      -webkit-tap-highlight-color: transparent; /* إزالة تمييز اللمس */
     }
 
     h1 {
-      font-size: 2rem;
+      font-size: 1.6rem;
       margin: 10px 0 15px;
       color: #FFD700;
-      text-shadow: 0 0 8px #FFD700;
+      text-shadow: 0 0 6px #FFD700;
     }
 
     .game-container {
       background: #111;
-      border: 4px solid #FFD700;
-      border-radius: 20px;
-      padding: 15px;
-      width: 95vw;
-      height: 80vh;
+      border: 3px solid #FFD700;
+      border-radius: 15px;
+      padding: 12px;
+      width: 90vw;
+      height: 75vh;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 0 15px #FFD700;
+      box-shadow: 0 0 12px #FFD700;
     }
 
     #goal {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
       min-height: 50px;
     }
 
@@ -54,10 +52,10 @@
       background-color: #FFD700;
       color: black;
       border: none;
-      border-radius: 15px;
-      padding: 14px;
-      margin: 8px 0;
-      font-size: 1.3rem;
+      border-radius: 12px;
+      padding: 10px;
+      margin: 6px 0;
+      font-size: 1.1rem;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -65,39 +63,44 @@
       transition: background-color 0.3s ease;
       outline-offset: 3px;
     }
-    .btn:focus, .btn:hover {
+    .btn:hover, .btn:focus {
       background-color: #FFA500;
       outline: 3px solid #000;
     }
 
     .choice-img {
-      width: 50px;
-      height: 50px;
-      margin-left: 12px;
+      width: 40px;
+      height: 40px;
+      margin-left: 10px;
       border: 2px solid #000;
-      border-radius: 8px;
+      border-radius: 6px;
       flex-shrink: 0;
     }
 
-    .result {
-      margin-top: 15px;
-      min-height: 40px;
+    #result {
+      margin-top: 12px;
+      min-height: 45px;
       font-weight: bold;
+      font-size: 1.3rem;
       color: #4CAF50;
-      font-size: 1.5rem;
-      text-shadow: 0 0 6px #4CAF50;
+      text-shadow: 0 0 5px #4CAF50;
+    }
+
+    #result.wrong {
+      color: #f44336;
+      text-shadow: 0 0 5px #f44336;
     }
 
     .accessibility-buttons {
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       display: flex;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
     }
     .accessibility-buttons button {
-      font-size: 1.2rem;
-      padding: 10px 15px;
-      border-radius: 12px;
+      font-size: 1rem;
+      padding: 8px 12px;
+      border-radius: 10px;
       border: none;
       background-color: #444;
       color: #fff;
@@ -120,105 +123,156 @@
   </div>
 
   <main class="game-container" role="main" aria-live="polite" aria-atomic="true" tabindex="0">
-    <h2 id="goal">الهدف الأول: القضاء على الفقر</h2>
+    <h2 id="goal">الهدف</h2>
 
-    <button class="btn" onclick="checkAnswer(0)" tabindex="1" aria-describedby="desc0">
-      <span id="opt0">توفير فرص عمل ومساعدة المحتاجين</span>
-      <img src="https://cdn-icons-png.flaticon.com/512/2331/2331934.png" alt="رمز شخص يقدم المال لشخص آخر" class="choice-img" />
+    <button class="btn" onclick="checkAnswer(0)" aria-describedby="desc0">
+      <span id="opt0">الخيار 1</span>
+      <img src="" alt="" class="choice-img" id="img0"/>
     </button>
 
-    <button class="btn" onclick="checkAnswer(1)" tabindex="2" aria-describedby="desc1">
-      <span id="opt1">ترك الناس بدون دعم</span>
-      <img src="https://cdn-icons-png.flaticon.com/512/753/753345.png" alt="رمز رفض أو إيقاف" class="choice-img" />
+    <button class="btn" onclick="checkAnswer(1)" aria-describedby="desc1">
+      <span id="opt1">الخيار 2</span>
+      <img src="" alt="" class="choice-img" id="img1"/>
     </button>
 
-    <button class="btn" onclick="checkAnswer(2)" tabindex="3" aria-describedby="desc2">
-      <span id="opt2">منع المساعدات</span>
-      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828843.png" alt="رمز ممنوع" class="choice-img" />
+    <button class="btn" onclick="checkAnswer(2)" aria-describedby="desc2">
+      <span id="opt2">الخيار 3</span>
+      <img src="" alt="" class="choice-img" id="img2"/>
     </button>
 
-    <div id="result" class="result" aria-live="assertive"></div>
+    <div id="result" aria-live="assertive"></div>
   </main>
 
-  <script>
-    const goals = [
-      {
-        title: "الهدف الأول: القضاء على الفقر",
-        options: ["توفير فرص عمل ومساعدة المحتاجين", "ترك الناس بدون دعم", "منع المساعدات"],
-        images: [
-          "https://cdn-icons-png.flaticon.com/512/2331/2331934.png",
-          "https://cdn-icons-png.flaticon.com/512/753/753345.png",
-          "https://cdn-icons-png.flaticon.com/512/1828/1828843.png"
-        ],
-        correct: 0,
-        explanation: "✔️ برافو! كده إحنا بنساعد الناس ونقضي على الفقر."
-      },
-      {
-        title: "الهدف الرابع: التعليم الجيد",
-        options: ["بناء مدارس وتعليم الجميع", "منع الأطفال من التعليم", "التعليم للأغنياء فقط"],
-        images: [
-          "https://cdn-icons-png.flaticon.com/512/2922/2922079.png",
-          "https://cdn-icons-png.flaticon.com/512/753/753345.png",
-          "https://cdn-icons-png.flaticon.com/512/1828/1828843.png"
-        ],
-        correct: 0,
-        explanation: "✔️ التعليم الجيد بيفتح أبواب لمستقبل أفضل."
-      },
-      {
-        title: "الهدف السابع: طاقة نظيفة وبأسعار معقولة",
-        options: ["استخدام الطاقة الشمسية والرياح", "استخدام الفحم فقط", "عدم ترشيد الكهرباء"],
-        images: [
-          "https://cdn-icons-png.flaticon.com/512/1046/1046857.png",
-          "https://cdn-icons-png.flaticon.com/512/2620/2620993.png",
-          "https://cdn-icons-png.flaticon.com/512/753/753345.png"
-        ],
-        correct: 0,
-        explanation: "✔️ طاقة نظيفة معناها حياة أفضل للجميع."
-      },
-      {
-        title: "الهدف الثالث عشر: العمل المناخي",
-        options: ["حماية البيئة وتقليل التلوث", "زيادة المصانع الملوثة", "قطع الأشجار"],
-        images: [
-          "https://cdn-icons-png.flaticon.com/512/1006/1006512.png",
-          "https://cdn-icons-png.flaticon.com/512/1475/1475673.png",
-          "https://cdn-icons-png.flaticon.com/512/447/447031.png"
-        ],
-        correct: 0,
-        explanation: "✔️ العمل المناخي بيحمي كوكبنا من التغيرات الخطيرة."
-      }
-    ];
-
-    let current = 0;
-    let currentFontSize = 22;
-
-    function checkAnswer(index) {
-      const result = document.getElementById("result");
-      if (index === goals[current].correct) {
-        result.innerText = goals[current].explanation;
-        setTimeout(() => nextGoal(), 2500);
-      } else {
-        result.innerText = "❌ حاول تاني، إنت تقدر!";
-      }
+<script>
+  const goals = [
+    {
+      title: "الهدف الأول: القضاء على الفقر",
+      options: [
+        "توفير فرص عمل ومساعدة المحتاجين",
+        "ترك الناس بدون دعم",
+        "منع المساعدات"
+      ],
+      images: [
+        "https://cdn-icons-png.flaticon.com/512/2331/2331934.png",
+        "https://cdn-icons-png.flaticon.com/512/753/753345.png",
+        "https://cdn-icons-png.flaticon.com/512/1828/1828843.png"
+      ],
+      correct: 0,
+      explanation: "✔️ برافو! كده إحنا بنساعد الناس ونقضي على الفقر."
+    },
+    {
+      title: "الهدف الرابع: التعليم الجيد",
+      options: [
+        "بناء مدارس وتعليم الجميع",
+        "منع الأطفال من التعليم",
+        "التعليم للأغنياء فقط"
+      ],
+      images: [
+        "https://cdn-icons-png.flaticon.com/512/2922/2922079.png",
+        "https://cdn-icons-png.flaticon.com/512/753/753345.png",
+        "https://cdn-icons-png.flaticon.com/512/1828/1828843.png"
+      ],
+      correct: 0,
+      explanation: "✔️ التعليم الجيد بيفتح أبواب لمستقبل أفضل."
+    },
+    {
+      title: "الهدف السابع: طاقة نظيفة وبأسعار معقولة",
+      options: [
+        "استخدام الطاقة الشمسية والرياح",
+        "استخدام الفحم فقط",
+        "عدم ترشيد الكهرباء"
+      ],
+      images: [
+        "https://cdn-icons-png.flaticon.com/512/1046/1046857.png",
+        "https://cdn-icons-png.flaticon.com/512/2620/2620993.png",
+        "https://cdn-icons-png.flaticon.com/512/753/753345.png"
+      ],
+      correct: 0,
+      explanation: "✔️ طاقة نظيفة معناها حياة أفضل للجميع."
+    },
+    {
+      title: "الهدف الثالث عشر: العمل المناخي",
+      options: [
+        "حماية البيئة وتقليل التلوث",
+        "زيادة المصانع الملوثة",
+        "قطع الأشجار"
+      ],
+      images: [
+        "https://cdn-icons-png.flaticon.com/512/1006/1006512.png",
+        "https://cdn-icons-png.flaticon.com/512/1475/1475673.png",
+        "https://cdn-icons-png.flaticon.com/512/447/447031.png"
+      ],
+      correct: 0,
+      explanation: "✔️ العمل المناخي بيحمي كوكبنا من التغيرات الخطيرة."
     }
+  ];
 
-    function nextGoal() {
-      current++;
-      if (current < goals.length) {
-        const goal = document.getElementById("goal");
-        const result = document.getElementById("result");
-        goal.innerText = goals[current].title;
-        for (let i = 0; i < 3; i++) {
-          document.getElementById("opt" + i).innerText = goals[current].options[i];
-          document.querySelectorAll(".choice-img")[i].src = goals[current].images[i];
+  let current = 0;
+  let currentFontSize = 16;
+
+  function loadGoal() {
+    const goal = document.getElementById("goal");
+    const result = document.getElementById("result");
+    goal.innerText = goals[current].title;
+    result.innerText = "";
+    result.classList.remove('wrong');
+
+    for(let i=0; i<3; i++){
+      document.getElementById("opt"+i).innerText = goals[current].options[i];
+      const img = document.getElementById("img"+i);
+      img.src = goals[current].images[i];
+      img.alt = "صورة توضيحية للخيار " + (i+1);
+      document.querySelectorAll(".btn")[i].disabled = false;
+    }
+  }
+
+  function checkAnswer(selected) {
+    const result = document.getElementById("result");
+    if(selected === goals[current].correct){
+      result.classList.remove('wrong');
+      result.innerText = goals[current].explanation;
+
+      // تعطيل الأزرار لمنع الاختيارات أثناء الانتظار
+      document.querySelectorAll(".btn").forEach(btn => btn.disabled = true);
+
+      setTimeout(() => {
+        current++;
+        if(current < goals.length){
+          loadGoal();
+        } else {
+          // نهاية اللعبة
+          document.getElementById("goal").innerText = "🎉 مبروك! خلصت اللعبة بنجاح!";
+          document.querySelectorAll(".btn").forEach(btn => btn.style.display = "none");
+          result.innerText = "👏 إنت بطل التنمية المستدامة!";
         }
-        result.innerText = "";
-        document.activeElement.blur();
-      } else {
-        document.getElementById("goal").innerText = "🎉 خلصت اللعبة بنجاح!";
-        document.querySelectorAll(".btn").forEach(btn => btn.style.display = 'none');
-        document.getElementById("result").innerText = "👏 إنت بطل التنمية المستدامة!";
-      }
-    }
+      }, 2500);
 
-    function restartGame() {
-      current = 
+    } else {
+      result.classList.add('wrong');
+      result.innerText = "❌ حاول تاني، إنت تقدر!";
+    }
+  }
+
+  function changeFontSize(delta) {
+    currentFontSize += delta;
+    if(currentFontSize < 12) currentFontSize = 12;
+    if(currentFontSize > 30) currentFontSize = 30;
+    document.documentElement.style.fontSize = currentFontSize + "px";
+  }
+
+  function restartGame() {
+    current = 0;
+    document.querySelectorAll(".btn").forEach(btn => {
+      btn.style.display = "flex";
+      btn.disabled = false;
+    });
+    changeFontSize(0); // تأكد من تعيين الحجم الحالي
+    loadGoal();
+    document.getElementById("result").innerText = "";
+  }
+
+  // بدء اللعبة
+  loadGoal();
+</script>
+</body>
+</html>
