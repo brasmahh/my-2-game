@@ -223,8 +223,9 @@
       const img = document.getElementById("img"+i);
       img.src = goals[current].images[i];
       img.alt = "صورة توضيحية للخيار " + (i+1);
-      document.querySelectorAll(".btn")[i].disabled = false;
-      document.querySelectorAll(".btn")[i].style.display = 'flex';
+      const btn = document.querySelectorAll(".btn")[i];
+      btn.disabled = false;
+      btn.style.display = 'flex';
     }
   }
 
@@ -239,9 +240,10 @@
       result.classList.remove('wrong');
       result.innerText = goals[current].explanation;
 
-      // تعطيل الأزرار
+      // تعطيل الأزرار حتى لا يمكن الضغط مره أخرى
       document.querySelectorAll(".btn").forEach(btn => btn.disabled = true);
 
+      // بعد 2.5 ثانية انتقل للسؤال التالي أو النهاية
       timer = setTimeout(() => {
         current++;
         if(current < goals.length){
@@ -266,4 +268,17 @@
     document.documentElement.style.fontSize = currentFontSize + "px";
   }
 
-  function restart
+  function restartGame() {
+    current = 0;
+    document.querySelectorAll(".btn").forEach(btn => btn.style.display = "flex");
+    loadGoal();
+    const result = document.getElementById("result");
+    result.innerText = "";
+    result.classList.remove('wrong');
+  }
+
+  // تحميل السؤال الأول عند فتح الصفحة
+  window.onload = loadGoal;
+</script>
+</body>
+</html>
